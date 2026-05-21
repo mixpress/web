@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MixPress - El sabor de hogar, ahora Express</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --verde-oscuro: #446946;
+            --verde-claro: #85a34e;
+            --amarillo: #ffd670;
+            --marron: #a86b43;
+            --blanco: #ffffff;
+            --gris-fondo: #fcfbf9;
+            --texto-oscuro: #2d2d2d;
+            --gris-texto: #555555;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--gris-fondo); color: var(--texto-oscuro); line-height: 1.6; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 80px 0; }
+
+        .btn {
+            display: inline-block; background-color: var(--verde-oscuro); color: var(--blanco);
+            padding: 16px 32px; border-radius: 30px; text-decoration: none; font-weight: 600;
+            transition: all 0.3s ease; border: none; cursor: pointer;
+        }
+        .btn:hover { background-color: var(--verde-claro); transform: translateY(-3px); }
+
+        h2.section-title { text-align: center; font-size: 2.5rem; color: var(--verde-oscuro); margin-bottom: 50px; }
+        h2.section-title::after { content: ''; display: block; width: 60px; height: 4px; background-color: var(--verde-claro); margin: 15px auto 0 auto; }
+
+        header { background-color: rgba(255, 255, 255, 0.95); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; max-width: 1200px; margin: 0 auto; }
+        .logo-img { max-height: 60px; width: auto; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { text-decoration: none; color: var(--texto-oscuro); font-weight: 500; }
+        .nav-links a:hover { color: var(--verde-claro); }
+
+        .hero { min-height: 80vh; display: flex; align-items: center; background: linear-gradient(135deg, #ffffff 0%, #f4f7f2 100%); }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; width: 90%; max-width: 1200px; margin: 0 auto; padding: 40px 0; }
+        .hero-content h1 { font-size: 3.5rem; color: var(--verde-oscuro); margin-bottom: 25px; line-height: 1.1; }
+        .hero-content p { font-size: 1.2rem; color: var(--gris-texto); margin-bottom: 35px; }
+        .hero-image img { max-width: 100%; border-radius: 20px; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15)); }
+
+        .benefits { background-color: var(--blanco); }
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; text-align: center; }
+        .benefit-card { padding: 40px 30px; border-radius: 20px; background-color: var(--gris-fondo); border: 1px solid #f0f0f0; }
+        .benefit-icon { font-size: 3rem; margin-bottom: 20px; display: inline-block; }
+        .benefit-card h3 { color: var(--verde-oscuro); margin-bottom: 15px; }
+
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 30px; }
+        .product-card { background: var(--blanco); border-radius: 24px; padding: 40px 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 2px solid transparent; }
+        
+        .product-card img { 
+            display: block;
+            max-height: 300px; 
+            max-width: 100%;
+            margin: 0 auto 25px auto; 
+            object-fit: contain;
+        }
+
+        .tag-badge { display: inline-block; padding: 8px 20px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; margin-bottom: 20px; color: var(--blanco); }
+        .bg-arveja { background-color: var(--verde-oscuro); }
+        .bg-lenteja { background-color: var(--marron); }
+        .bg-maiz { background-color: var(--amarillo); color: var(--texto-oscuro); }
+        .tech-details { text-align: left; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; font-size: 0.95rem; color: var(--gris-texto); }
+
+        .steps { background-color: var(--blanco); }
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 30px; }
+        .step-item { text-align: center; padding: 20px; }
+        .step-number { width: 60px; height: 60px; background-color: var(--verde-claro); color: var(--blanco); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 25px auto; }
+        .step-item h3 { color: var(--verde-oscuro); margin-bottom: 15px; }
+
+        .cta-section { background: linear-gradient(135deg, var(--verde-oscuro) 0%, #2c442d 100%); color: var(--blanco); text-align: center; border-radius: 30px; padding: 80px 40px; }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .btn-compra { background-color: var(--amarillo); color: var(--texto-oscuro); font-size: 1.2rem; padding: 18px 40px; margin-top: 20px; }
+
+        footer { background-color: var(--texto-oscuro); color: rgba(255,255,255,0.7); text-align: center; padding: 50px 20px; }
+        footer h2 { color: var(--blanco); margin-bottom: 15px; }
+
+        .videos-section {
+            padding: 20px 0 60px 0;
+            background-color: var(--blanco);
+        }
+        .container-videos {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .video-wrapper {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            background-color: #000;
+        }
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <img src="logo-mixpress-png.png" alt="MixPress" class="logo-img">
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#variedades">Variedades</a></li>
+                <li><a href="#comprar">Comprar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <h1>Mixpress</h1>
+                <p>Olvídate de picar, lavar vegetales y calcular tiempos. Nosotros hicimos el trabajo pesado para que tú disfrutes de un arroz perfecto en <strong>solo 15 minutos</strong>.</p>
+                <a href="#comprar" class="btn">Comprar MixPress Ahora</a>
+            </div>
+            <div class="hero-image">
+                <img src="pouch.png" alt="MixPress Pouch">
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <div class="benefits-grid">
+                <div class="benefit-card"><span class="benefit-icon">⏱️</span><h3>Tiempo Récord</h3><p>De 45 min a 15 min reales en una sola olla.</p></div>
+                <div class="benefit-card"><span class="benefit-icon">🥗</span><h3>Cero Esfuerzo</h3><p>Sin lavar ni picar. Todo viene listo para integrar.</p></div>
+                <div class="benefit-card"><span class="benefit-icon">🛒</span><h3>Tu Toque</h3><p>Agrega agua, sal o cebolla. Tú le das la firma final.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="variedades">
+        <div class="container">
+            <h2 class="section-title">Elige tu favorito</h2>
+            <div class="products-grid">
+                
+                <div class="product-card">
+                    <img src="arveja-jpg.png" alt="Arroz con Arveja">
+                    <span class="tag-badge bg-arveja">Nutritivo</span>
+                    <h3>Arroz con arveja y Zanahoria</h3>
+                    <div class="tech-details"><strong>El secreto:</strong> Deshidratados con precocción breve. Mantienen color y textura ideal.</div>
+                </div>
+
+                <div class="product-card">
+                    <img src="lenteja-jpg-2.png" alt="Arroz con Lentejas">
+                    <span class="tag-badge bg-lenteja">Alto en Proteína</span>
+                    <h3>Arroz con Lentejas</h3>
+                    <div class="tech-details"><strong>El secreto:</strong> Lentejas deshidratadas y precocidas al 70%. Cero ollas a presión.</div>
+                </div>
+
+                <div class="product-card">
+                    <img src="maiz-jpg.png" alt="Arroz con Maíz">
+                    <span class="tag-badge bg-maiz">Dulzor Casero</span>
+                    <h3>Arroz con Maíz</h3>
+                    <div class="tech-details"><strong>El secreto:</strong> Maíz precocido al vapor para cero humedad y mayor higiene.</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="como-funciona" class="steps">
+        <div class="container">
+            <h2 class="section-title">3 pasos simples</h2>
+            <div class="steps-grid">
+                <div class="step-item"><div class="step-number">1</div><h3>Destapa</h3><p>Arroz parbolizado y vegetales calibrados listos.</p></div>
+                <div class="step-item"><div class="step-number">2</div><h3>Agrega Agua</h3><p>Vierte a la olla, añade agua, sal y tu toque personal.</p></div>
+                <div class="step-item"><div class="step-number">3</div><h3>Disfruta</h3><p>Espera 15 minutos y sirve un arroz perfecto.</p></div>
+            </div>
+        </div>
+    </section>
+
+<section class="videos-section">
+        <div class="container-videos">
+            
+            <div class="video-wrapper">
+                <iframe src="https://drive.google.com/file/d/1rgI57f9fCeCbSeD4P8lhyJACUuGEBb_R/preview" width="100%" height="450" allow="autoplay" style="border:none;"></iframe>
+            </div>
+            
+            <div class="video-wrapper">
+                <iframe src="https://drive.google.com/file/d/1o9oObKJg_Y28KvHlHoUEL2ws5hF5eYdo/preview" width="100%" height="450" allow="autoplay" style="border:none;"></iframe>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="comprar" class="container">
+        <div class="cta-section">
+            <h2>Menos tiempo más sabor.</h2>
+            <p>Haz tu almuerzo más fácil con MixPress. Lleva hoy tu combinación favorita y descubre la forma más inteligente de cocinar.</p>
+            <a href="#" class="btn btn-compra">Añadir al Carrito</a>
+        </div>
+    </section>
+
+    <footer>
+        <h2>MixPress</h2>
+        <p>&copy; 2026 MixPress. Bogotá, Colombia.</p>
+    </footer>
+
+</body>
+</html>
